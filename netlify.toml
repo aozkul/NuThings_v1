@@ -1,0 +1,10 @@
+# netlify.toml  (REPO KÖKÜNDE!)
+[build]
+command = "npm run build"
+publish = ".next"            # ÖNEMLİ: publish ≠ base (kök)
+
+[build.environment]
+NODE_VERSION = "20"
+
+[[plugins]]
+package = "@netlify/plugin-nextjs"

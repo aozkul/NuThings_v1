@@ -1,0 +1,38 @@
+{
+  "home": {
+    "featured_title": "Öne Çıkan Ürünler",
+    "most_liked_title": "En Çok Beğenilen"
+  },
+  "footer": {
+    "newsletter_title": "Bültenimize Abone Olun!",
+    "newsletter_desc": "Kampanyalarımızdan ve indirimlerimizden güncel olarak haberdar olun.",
+    "email_placeholder": "E-posta adresinizi yazın...",
+    "subscribe_aria": "Abone ol",
+    "consent_terms": "Üyelik koşullarını",
+    "consent_privacy": "kişisel verilerimin",
+    "consent_rest": "korunmasını kabul ediyorum."
+  },
+  "filter": {
+    "title": "Filtrele",
+    "category": "Kategori",
+    "all_categories": "Tüm kategoriler",
+    "sort": "Sırala",
+    "sort_name": "İsme göre",
+    "sort_price_asc": "Fiyat (Artan)",
+    "sort_price_desc": "Fiyat (Azalan)",
+    "sort_most_liked": "En Çok Beğenilen"
+  },
+  "products_page": {
+    "title": "Ürünler"
+  },
+  "common": {
+    "filter": "Filtrele",
+    "category": "Kategori",
+    "sort": "Sırala",
+    "all_categories": "Tüm kategoriler",
+    "sort_name": "İsme göre",
+    "sort_price_asc": "Fiyat (Artan)",
+    "sort_price_desc": "Fiyat (Azalan)",
+    "sort_most_liked": "En Çok Beğenilen"
+  }
+}

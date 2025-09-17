@@ -1,0 +1,38 @@
+{
+  "home": {
+    "featured_title": "Ausgewählte Produkte",
+    "most_liked_title": "Beliebteste Produkte"
+  },
+  "footer": {
+    "newsletter_title": "Abonnieren Sie unseren Newsletter",
+    "newsletter_desc": "Erfahren Sie zuerst von Aktionen und Rabatten.",
+    "email_placeholder": "E-Mail-Adresse eingeben...",
+    "subscribe_aria": "Abonnieren",
+    "consent_terms": "Nutzungsbedingungen",
+    "consent_privacy": "meiner personenbezogenen Daten",
+    "consent_rest": "deren Schutz akzeptiere ich."
+  },
+  "filter": {
+    "title": "Filtern",
+    "category": "Kategorie",
+    "all_categories": "Alle Kategorien",
+    "sort": "Sortieren",
+    "sort_name": "Name (A–Z)",
+    "sort_price_asc": "Preis (aufsteigend)",
+    "sort_price_desc": "Preis (absteigend)",
+    "sort_most_liked": "Am beliebtesten"
+  },
+  "products_page": {
+    "title": "Produkte"
+  },
+  "common": {
+    "filter": "Filtern",
+    "category": "Kategorie",
+    "sort": "Sortieren",
+    "all_categories": "Alle Kategorien",
+    "sort_name": "Name (A–Z)",
+    "sort_price_asc": "Preis (aufsteigend)",
+    "sort_price_desc": "Preis (absteigend)",
+    "sort_most_liked": "Am beliebtesten"
+  }
+}
