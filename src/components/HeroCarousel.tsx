@@ -1,6 +1,8 @@
+// src/components/HeroCarousel.tsx
 "use client";
 
 import Link from "next/link";
+import Image from "next/image";
 import {useEffect, useMemo, useRef, useState} from "react";
 
 type Cat = {
@@ -23,26 +25,14 @@ export default function HeroCarousel({cats = [] as Cat[]}) {
 
   // autoplay
   useEffect(() => {
-    if (!scrollerRef.current || !data.length) return;
-    const el = scrollerRef.current;
-    let timer: any = null;
-
-    const tick = () => {
-      if (hover) return;
-      const w = el.clientWidth;
-      const max = el.scrollWidth - w;
-      let next = el.scrollLeft + w;
-      if (next > max + 10) next = 0;
-      el.scrollTo({left: next, behavior: "smooth"});
-    };
-
-    timer = setInterval(tick, 4500);
-    return () => {
-      if (timer) clearInterval(timer);
-    };
+    if (data.length < 2) return;
+    let t: any;
+    if (!hover) t = setInterval(() => scrollBy("next"), 5500);
+    return () => t && clearInterval(t);
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [hover, data.length]);
 
-  // aktif index
+  // active index
   useEffect(() => {
     const el = scrollerRef.current;
     if (!el) return;
@@ -55,119 +45,145 @@ export default function HeroCarousel({cats = [] as Cat[]}) {
     return () => el.removeEventListener("scroll", onScroll);
   }, [data.length]);
 
-  const goto = (i: number) => {
+  const scrollToIndex = (idx: number) => {
     const el = scrollerRef.current;
     if (!el) return;
     const w = el.clientWidth;
-    el.scrollTo({left: w * i, behavior: "smooth"});
+    el.scrollTo({left: w * idx, behavior: "smooth"});
   };
 
-  const scrollBy = (dir: "prev" | "next") => {
-    const i = dir === "next" ? active + 1 : active - 1;
-    const clamped = Math.max(0, Math.min(data.length - 1, i));
-    goto(clamped);
+  const scrollBy = (dir: "next" | "prev") => {
+    const el = scrollerRef.current;
+    if (!el) return;
+    const w = el.clientWidth;
+    const maxIdx = Math.max(0, data.length - 1);
+    let nextIdx = active + (dir === "next" ? 1 : -1);
+    if (nextIdx > maxIdx) nextIdx = 0;
+    if (nextIdx < 0) nextIdx = maxIdx;
+    el.scrollTo({left: w * nextIdx, behavior: "smooth"});
   };
 
   if (!data.length) return null;
 
   return (
     <section
-      className="relative left-1/2 -translate-x-1/2 w-[100vw] max-w-[100vw] overflow-x-hidden"
+      className="relative w-full"
       onMouseEnter={() => setHover(true)}
       onMouseLeave={() => setHover(false)}
     >
-      {/* tek slayt = tam genişlik */}
+      {/* SLIDES */}
       <div
         ref={scrollerRef}
-        className="relative overflow-x-auto overflow-y-visible no-scrollbar scroll-smooth snap-x snap-mandatory flex gap-0 w-full"
+        className="relative w-full overflow-x-auto overflow-y-hidden scroll-smooth snap-x snap-mandatory no-scrollbar"
+        style={{WebkitOverflowScrolling: "touch"}}
       >
-        {data.map((c, i) => (
-          <div key={`${c.id}-${i}`} className="snap-center min-w-full">
-            <Link href={c.slug ? `/category/${c.slug}` : `/category/${c.id}` } className="group block relative overflow-hidden">
-              {/* yükseklik: bir önceki küçültülmüş değerler */}
-              <div className="relative w-full h-[320px] sm:h-[420px] lg:h-[520px] xl:h-[580px]">
-                {c.image_url ? (
-                  <img
-                    src={c.image_url}
-                    alt={c.name || "Kategori"}
-                    className="absolute inset-0 w-full h-full object-cover transition-transform duration-700 group-hover:scale-[1.03]"
-                    loading="eager"
-                    decoding="async"
-                    fetchPriority="high"   // <— DÜZELTİLDİ
-                  />
-                ) : (
-                  <div className="absolute inset-0 grid place-items-center bg-neutral-100">
-                    <span className="text-neutral-400">Görsel yok</span>
+        <div className="flex w-full">
+          {data.map((c, i) => {
+            const href = c.slug ? `/category/${c.slug}` : "#";
+            return (
+              <div
+                key={c.id ?? i}
+                className="relative w-full flex-none snap-start overflow-hidden"
+                style={{width: "100%"}}
+                aria-roledescription="slide"
+                aria-label={`${i + 1} / ${data.length}`}
+              >
+                <Link href={href} className="block group focus:outline-none">
+                  {/* Sabit/akıcı yükseklik (taşma/jitter yok) */}
+                  <div
+                    className="relative w-full"
+                    style={{
+                      height: "clamp(220px, 40vw, 560px)",
+                    }}
+                  >
+                    <Image
+                      src={c.image_url || "/placeholder/hero.jpg"}
+                      alt={c.name}
+                      fill
+                      sizes="100vw"
+                      priority={i === 0}
+                      className="absolute inset-0 w-full h-full object-cover object-center"
+                    />
+                    <div
+                      className="absolute inset-0 bg-gradient-to-t from-black/20 via-black/10 to-transparent pointer-events-none"/>
                   </div>
-                )}
 
-                {/* hafif overlay */}
-                <div
-                  className="pointer-events-none absolute inset-0 bg-[linear-gradient(180deg,rgba(0,0,0,.20),transparent_22%,transparent_78%,rgba(0,0,0,.28))]"/>
+                  {/* Metin katmanı */}
+                  <div
+                    className="pointer-events-none absolute inset-0 flex items-end pb-6 sm:pb-8 md:pb-10 lg:pb-12 xl:pb-14 px-4 sm:px-6 md:px-10">
+                    <div className="max-w-screen-xl mx-auto w-full">
+                      {/* Rozet / kategori adı */}
+                      <div
+                        className="inline-flex items-center gap-3 rounded-full bg-white/70 backdrop-blur px-4 py-2 lg:px-5 lg:py-2.5 shadow-sm ring-1 ring-black/10">
+                        <span className="text-sm sm:text-base lg:text-lg font-medium text-gray-900">
+                          {c.name}
+                        </span>
+                      </div>
 
-                {/* başlık & tagline */}
-                <div className="absolute inset-0 flex flex-col justify-end p-5 sm:p-7">
-                  <h3
-                    className="text-white/95 drop-shadow-[0_1px_2px_rgba(0,0,0,.6)] text-2xl sm:text-3xl lg:text-4xl font-semibold leading-tight tracking-tight">
-                    {c.name}
-                  </h3>
-                  {c.tagline && (
-                    <p
-                      className="mt-1 text-white/85 text-sm sm:text-base lg:text-lg line-clamp-2 drop-shadow-[0_1px_2px_rgba(0,0,0,.55)]">
-                      {c.tagline}
-                    </p>
-                  )}
-                </div>
+                      {/* Tagline – sadece büyük ekranlarda büyütüldü */}
+                      {c.tagline ? (
+                        <p
+                          className="mt-3 max-w-3xl text-white/90 text-sm sm:text-base md:text-lg lg:text-xl xl:text-2xl">
+                          {c.tagline}
+                        </p>
+                      ) : null}
+                    </div>
+                  </div>
+                </Link>
               </div>
-            </Link>
-          </div>
-        ))}
+            );
+          })}
+        </div>
       </div>
 
-      {/* oklar */}
+      {/* ARROWS (siyah ikonlar) */}
       {data.length > 1 && (
         <>
           <button
+            type="button"
             onClick={() => scrollBy("prev")}
             aria-label="Önceki"
-            className="hidden md:flex items-center justify-center absolute left-3 sm:left-5 top-1/2 -translate-y-1/2 h-10 w-10 rounded-full bg-white/85 hover:bg-white shadow-lg ring-1 ring-black/10 transition"
+            className="pointer-events-auto hidden md:flex items-center justify-center
+                       absolute left-4 top-1/2 -translate-y-1/2 z-30
+                       w-12 h-12 rounded-full bg-white/70 hover:bg-white focus:bg-white shadow-lg ring-1 ring-black/10 transition"
           >
-            ‹
+            <svg width="18" height="18" viewBox="0 0 24 24" aria-hidden="true">
+              <path d="M14.5 18l-6-6 6-6" fill="none" stroke="black" strokeWidth="2" strokeLinecap="round"
+                    strokeLinejoin="round"/>
+            </svg>
           </button>
+
           <button
+            type="button"
             onClick={() => scrollBy("next")}
             aria-label="Sonraki"
-            className="hidden md:flex items-center justify-center absolute right-3 sm:right-5 top-1/2 -translate-y-1/2 h-10 w-10 rounded-full bg-white/85 hover:bg-white shadow-lg ring-1 ring-black/10 transition"
+            className="pointer-events-auto hidden md:flex items-center justify-center
+                       absolute right-4 top-1/2 -translate-y-1/2 z-30
+                       w-12 h-12 rounded-full bg-white/70 hover:bg-white focus:bg-white shadow-lg ring-1 ring-black/10 transition"
           >
-            ›
+            <svg width="18" height="18" viewBox="0 0 24 24" aria-hidden="true">
+              <path d="M9.5 6l6 6-6 6" fill="none" stroke="black" strokeWidth="2" strokeLinecap="round"
+                    strokeLinejoin="round"/>
+            </svg>
           </button>
         </>
       )}
 
-      {/* dots */}
+      {/* DOTS */}
       {data.length > 1 && (
-        <div className="mt-3 flex items-center justify-center gap-2">
-          {data.map((_, i) => {
-            const on = i === active;
-            return (
-              <button
-                key={i}
-                aria-label={`Slide ${i + 1}`}
-                onClick={() => goto(i)}
-                className={`h-1.5 rounded-full transition-all ${
-                  on ? "w-7 bg-black/75" : "w-3 bg-black/25 hover:bg-black/40"
-                }`}
-              />
-            );
-          })}
+        <div className="pointer-events-auto absolute bottom-3 left-1/2 -translate-x-1/2 z-20 flex items-center gap-2">
+          {data.map((_, i) => (
+            <button
+              key={i}
+              aria-label={`Slide ${i + 1}`}
+              onClick={() => scrollToIndex(i)}
+              className={`h-1.5 rounded-full transition-all ${
+                active === i ? "w-6 bg-white" : "w-2 bg-white/60 hover:bg-white/80"
+              }`}
+            />
+          ))}
         </div>
       )}
     </section>
   );
-}
-
-declare global {
-  interface CSSStyleDeclaration {
-    WebkitMaskImage?: string;
-  }
 }
