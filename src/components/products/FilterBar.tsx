@@ -14,9 +14,10 @@ type Labels = {
   sort_price_asc: string;
   sort_price_desc: string;
   sort_most_liked: string;
+  sort_admin: string;
 };
 
-type SortKey = "name" | "price_asc" | "price_desc" | "most_liked";
+type SortKey = "name" | "price_asc" | "price_desc" | "most_liked" | "admin_order";
 
 export default function FilterBar({
                                     labels,
@@ -43,6 +44,7 @@ export default function FilterBar({
 
   const sorts = useMemo(
     () => [
+      {value: "admin_order", label: labels.sort_admin},
       {value: "most_liked", label: labels.sort_most_liked},
       {value: "price_asc", label: labels.sort_price_asc},
       {value: "price_desc", label: labels.sort_price_desc},

@@ -33,6 +33,7 @@
     "sort_name": "Name (A–Z)",
     "sort_price_asc": "Price (Low→High)",
     "sort_price_desc": "Price (High→Low)",
-    "sort_most_liked": "Most Liked"
+    "sort_most_liked": "Most Liked",
+    "sort_admin": "Default"
   }
 }

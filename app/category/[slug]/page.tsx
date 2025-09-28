@@ -7,7 +7,7 @@ import {cookies} from "next/headers";
 export const revalidate = 60;
 
 type Params = { slug: string };
-type Search = { sort?: "name" | "price_asc" | "price_desc" | "most_liked" };
+type Search = { sort?: "name" | "price_asc" | "price_desc" | "most_liked" | "admin_order" };
 
 // Next.js 15: params Promise
 export async function generateMetadata(
@@ -42,6 +42,7 @@ function T(messages: any, locale: "tr" | "en" | "de") {
     sort_price_asc: t(messages.common, "sort_price_asc", locale === "de" ? "Preis (aufsteigend)" : locale === "tr" ? "Fiyat (Artan)" : "Price (Low→High)"),
     sort_price_desc: t(messages.common, "sort_price_desc", locale === "de" ? "Preis (absteigend)" : locale === "tr" ? "Fiyat (Azalan)" : "Price (High→Low)"),
     sort_most_liked: t(messages.common, "sort_most_liked", locale === "de" ? "Am beliebtesten" : locale === "tr" ? "En Çok Beğenilen" : "Most Liked"),
+    sort_admin: t(messages.common, "sort_admin", locale === "de" ? "Standart" : locale === "tr" ? "Varsayılan" : "Default"),
   };
 }
 
@@ -49,7 +50,8 @@ export default async function CategoryPage(
   {params, searchParams}: { params: Promise<Params>; searchParams: Promise<Search> }
 ) {
   const {slug} = await params;
-  const {sort = "most_liked"} = await searchParams;
+  const {sort: sortParam} = await searchParams;
+  const sort = sortParam ?? "admin_order";
   const supabase = supabaseServer();
 
   // i18n
@@ -96,18 +98,19 @@ export default async function CategoryPage(
   if (catId) {
     const {data} = await supabase
       .from("products")
-      .select("id, slug, name, price, image_url, image_alt, category_id")
-      .eq("category_id", catId);
+      .select("id, slug, name, price, image_url, image_alt, category_id, sort_order")
+      .eq("category_id", catId)
+      .order(sort === "price_asc" ? "price" : sort === "price_desc" ? "price" : sort === "admin_order" ? "sort_order" : "name", {
+        ascending: sort === "price_desc" ? false : true,
+        nullsFirst: false
+      })
+      .order(sort === "admin_order" ? "name" : "name", {ascending: true});
     products = data || [];
   }
 
   // Sıralama
   let finalList = products;
-  if (sort === "price_asc") {
-    finalList = [...finalList].sort((a: any, b: any) => Number(a.price) - Number(b.price));
-  } else if (sort === "price_desc") {
-    finalList = [...finalList].sort((a: any, b: any) => Number(b.price) - Number(a.price));
-  } else if (sort === "most_liked" && finalList.length) {
+  if (sort === "most_liked" && finalList.length) {
     const ids = finalList.map((p: any) => p.id);
     const {data: stats} = await supabase
       .from("product_stats")
@@ -119,12 +122,7 @@ export default async function CategoryPage(
     finalList = [...finalList].sort(
       (a: any, b: any) => (likeMap.get(b.id) || 0) - (likeMap.get(a.id) || 0)
     );
-  } else {
-    finalList = [...finalList].sort((a: any, b: any) =>
-      String(a.name).localeCompare(String(b.name))
-    );
   }
-
   return (
     <div className="container-tight my-10">
       <h1 className="text-2xl font-semibold mb-2">{cat?.name || L.title()}</h1>
@@ -143,6 +141,7 @@ export default async function CategoryPage(
             sort_price_asc: L.sort_price_asc,
             sort_price_desc: L.sort_price_desc,
             sort_most_liked: L.sort_most_liked,
+            sort_admin: L.sort_admin,
           }}
           showCategory={false}          // sadece "Sırala"
           selectedSort={sort}

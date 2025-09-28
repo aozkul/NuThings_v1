@@ -33,6 +33,7 @@
     "sort_name": "İsme göre",
     "sort_price_asc": "Fiyat (Artan)",
     "sort_price_desc": "Fiyat (Azalan)",
-    "sort_most_liked": "En Çok Beğenilen"
+    "sort_most_liked": "En Çok Beğenilen",
+    "sort_admin": "Varsayılan"
   }
 }

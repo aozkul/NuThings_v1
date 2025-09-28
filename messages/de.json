@@ -237,6 +237,7 @@
     "i̇letişim_bilgileri": "Kontaktinformationen",
     "instagram": "Instagram",
     "twitter": "Twitter",
-    "type_locale_de_tr_en_type_i18ncontexttype_const_i18ncontext_crea": ";\ntype Locale = \"de\" | \"tr\" | \"en\";\n\ntype I18nContextType = ;\n\nconst I18nContext = createContext"
+    "type_locale_de_tr_en_type_i18ncontexttype_const_i18ncontext_crea": ";\ntype Locale = \"de\" | \"tr\" | \"en\";\n\ntype I18nContextType = ;\n\nconst I18nContext = createContext",
+    "sort_admin": "Standart"
   }
 }

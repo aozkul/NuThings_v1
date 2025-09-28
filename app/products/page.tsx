@@ -7,7 +7,7 @@ export const revalidate = 60;
 
 type Search = {
   category_id?: string;
-  sort?: "name" | "price_asc" | "price_desc" | "most_liked";
+  sort?: "name" | "price_asc" | "price_desc" | "most_liked" | "admin_order";
 };
 
 function t(ns: any, key: string, fb?: string) {
@@ -81,6 +81,13 @@ export default async function ProductsPage({
         : locale === "tr"
           ? "En Çok Beğenilen"
           : "Most Liked"),
+    sort_admin:
+      t(messages.common, "sort_admin") ||
+      (locale === "de"
+        ? "Standart"
+        : locale === "tr"
+          ? "Varsayılan"
+          : "Default"),
   };
 
   // Kategoriler
@@ -92,24 +99,30 @@ export default async function ProductsPage({
   // Ürünler
   let query = supabase
     .from("products")
-    .select("id, slug, name, price, image_url, image_alt, category_id")
-    .order("name", {ascending: true});
+    .select("id, slug, name, price, image_url, image_alt, category_id, sort_order");
 
   if (category_id) query = query.eq("category_id", category_id);
+  // Apply ordering based on selected sort
+  if (sort === "price_asc") {
+    query = query.order("price", {ascending: true, nullsFirst: false});
+  } else if (sort === "price_desc") {
+    query = query.order("price", {ascending: false, nullsFirst: false});
+  } else if (sort === "admin_order") {
+    // Admin-defined order within category: by sort_order then by name
+    query = query
+      .order("sort_order", {ascending: true, nullsFirst: false})
+      .order("name", {ascending: true});
+  } else {
+    // Default fallback: name asc (keeps previous behavior)
+    query = query.order("name", {ascending: true});
+  }
+
 
   const {data: products} = await query;
 
   // Sıralama
   let finalList = products || [];
-  if (sort === "price_asc") {
-    finalList = [...finalList].sort(
-      (a: any, b: any) => Number(a.price) - Number(b.price)
-    );
-  } else if (sort === "price_desc") {
-    finalList = [...finalList].sort(
-      (a: any, b: any) => Number(b.price) - Number(a.price)
-    );
-  } else if (sort === "most_liked" && finalList.length) {
+  if (sort === "most_liked" && finalList.length) {
     const ids = finalList.map((p: any) => p.id);
     const {data: stats} = await supabase
       .from("product_stats")
@@ -121,12 +134,7 @@ export default async function ProductsPage({
     finalList = [...finalList].sort(
       (a: any, b: any) => (likeMap.get(b.id) || 0) - (likeMap.get(a.id) || 0)
     );
-  } else {
-    finalList = [...finalList].sort((a: any, b: any) =>
-      String(a.name).localeCompare(String(b.name))
-    );
   }
-
   return (
     <div className="container-tight my-10">
       <h1 className="text-2xl font-semibold mb-4">{L.title}</h1>
