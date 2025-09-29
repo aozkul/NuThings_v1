@@ -27,14 +27,23 @@ export default async function Footer() {
   const {data: settingsRows} = await supabase
     .from("settings")
     .select("key, value")
-    .in("key", ["social_instagram", "social_twitter", "social_email", "social_phone"]);
+    .in("key", [
+      "social_instagram",
+      "social_twitter",
+      "social_email",
+      "social_phone",
+      "site_tagline"
+    ]);
 
-  const settings = Object.fromEntries((settingsRows || []).map(r => [r.key, (r.value || "").trim()]));
+  const settings = Object.fromEntries(
+    (settingsRows || []).map(r => [r.key, (r.value || "").trim()])
+  );
 
   const instagramUrl = settings["social_instagram"] || "https://instagram.com";
   const twitterUrl = settings["social_twitter"] || "https://twitter.com";
   const emailAddr = settings["social_email"] || "info@nut-things.com";
   const phoneNumber = settings["social_phone"] || "+49 172 8891010";
+  const siteTagline = settings["site_tagline"] || "Doğadan sofranıza; lokum, kuruyemiş ve daha fazlası.";
 
   return (
     <footer className="border-t mt-12 bg-white">
@@ -46,8 +55,8 @@ export default async function Footer() {
             <img src="/logo.jpg" alt="NuThings" className="h-10 w-10 rounded-full object-cover"/>
             <span className="font-semibold">NuThings</span>
           </div>
-          <p className="text-sm text-neutral-700">
-            Doğadan sofranıza; lokum, kuruyemiş ve daha fazlası.
+          <p className="text-sm font-semibold text-neutral-700">
+            {siteTagline}
           </p>
         </div>
 
