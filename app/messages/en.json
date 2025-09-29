@@ -42,5 +42,15 @@
     "quantity": "Quantity",
     "buy": "Buy",
     "unavailable": "Unavailable – out of stock"
+  },
+  "cart": {
+    "title": "Cart",
+    "empty": "Your cart is empty.",
+    "subtotal": "Subtotal",
+    "clear": "Clear",
+    "checkout": "Checkout",
+    "stock": "Stock",
+    "remove": "Remove",
+    "button": "Cart"
   }
 }

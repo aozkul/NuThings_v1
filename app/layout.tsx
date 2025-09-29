@@ -4,6 +4,7 @@ import type {Metadata} from "next";
 import "./globals.css";
 import Navbar from "@/src/components/Navbar";
 import Footer from "@/src/components/Footer";
+import {CartProvider} from "@/src/components/cart/CartContext";
 import {cookies} from "next/headers";
 import {I18nProvider} from "@/src/i18n/provider";
 import DOMTranslate from "@/src/i18n/DOMTranslate";
@@ -34,9 +35,11 @@ export default async function RootLayout(props: { children: React.ReactNode }) {
     <body className="overflow-x-clip">
     <I18nProvider locale={locale} messages={messages}>
       <DOMTranslate/>
-      <Navbar/>
-      {props.children}
-      <Footer/>
+      <CartProvider>
+        <Navbar/>
+        {props.children}
+        <Footer/>
+      </CartProvider>
     </I18nProvider>
 
     {/* Analytics */}

@@ -5,6 +5,9 @@ import Image from "next/image";
 import {useEffect, useMemo, useRef, useState} from "react";
 import {usePathname} from "next/navigation";
 import {ShieldIcon} from "@/src/components/Icons";
+import CartButton from "@/src/components/cart/CartButton";
+import MiniCart from "@/src/components/cart/MiniCart";
+import {useCart} from "@/src/components/cart/CartContext";
 import {IconBadge} from "@/src/components/IconBadge";
 import LocaleSwitcher from "@/src/components/LocaleSwitcher";
 import {supabase} from "@/src/lib/supabaseClient";
@@ -136,6 +139,7 @@ export default function Navbar() {
           {/* Sağ aksiyonlar (desktop) */}
           <div className="hidden md:flex items-center gap-3">
             <LocaleSwitcher/>
+            <CartButton/>
             <Link
               href="/admin"
               className="inline-flex items-center gap-2 px-2 py-2 rounded-xl border border-neutral-200 bg-white shadow-sm hover:bg-neutral-50 focus:outline-none focus:ring-2 focus:ring-neutral-300"
@@ -238,6 +242,7 @@ export default function Navbar() {
                 onClick={close}
                 className="w-full inline-flex items-center justify-center gap-2 rounded-xl border border-neutral-200 bg-white px-3 py-3 text-sm font-medium shadow-sm hover:bg-neutral-50"
               >
+                <CartButton/>
                 <IconBadge bg="bg-violet-50" color="text-violet-600">
                   <ShieldIcon className="h-4 w-4"/>
                 </IconBadge>
@@ -247,6 +252,8 @@ export default function Navbar() {
           </nav>
         </div>
       </div>
+      {/* CART PORTAL */}
+  <MiniCart/>
     </header>
   );
 }

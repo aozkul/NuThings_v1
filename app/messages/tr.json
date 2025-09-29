@@ -42,5 +42,15 @@
     "quantity": "Adet",
     "buy": "Satın Al",
     "unavailable": "Stokta olmadığı için satın alınamaz"
+  },
+  "cart": {
+    "title": "Sepetim",
+    "empty": "Sepetiniz boş.",
+    "subtotal": "Ara toplam",
+    "clear": "Temizle",
+    "checkout": "Alışverişi tamamla",
+    "stock": "Stok",
+    "remove": "Kaldır",
+    "button": "Sepet"
   }
 }

@@ -42,5 +42,15 @@
     "quantity": "Menge",
     "buy": "Kaufen",
     "unavailable": "Nicht verfügbar – kein Lagerbestand"
+  },
+  "cart": {
+    "title": "Warenkorb",
+    "empty": "Ihr Warenkorb ist leer.",
+    "subtotal": "Zwischensumme",
+    "clear": "Leeren",
+    "checkout": "Zur Kasse",
+    "stock": "Lager",
+    "remove": "Entfernen",
+    "button": "Warenkorb"
   }
 }

@@ -200,8 +200,23 @@ export default async function ProductPage(
             </div>
           )}
 
-          <BuyBox productId={product.id} stock={product.stock} price={product.price} />
+          <BuyBox
+            productId={product.id}
+            stock={product.stock}
+            price={product.price}
+            title={product.name}
+            imageUrl={product.image_url}
+          />
 
+          {/* Cart meta (ek garanti) */}
+          <script type="application/json" data-product-json>
+            {JSON.stringify({
+              title: product.name,
+              slug: product.slug || slug,
+              imageUrl: product.image_url,
+              price: product.price,
+            })}
+          </script>
 
           {/* Short description */}
           {product.description && (
