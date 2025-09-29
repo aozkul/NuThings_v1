@@ -35,5 +35,12 @@
     "sort_price_desc": "Fiyat (Azalan)",
     "sort_most_liked": "En Çok Beğenilen",
     "sort_admin": "Varsayılan"
+  },
+  "product": {
+    "out_of_stock": "Stokta yok",
+    "in_stock": "Stokta",
+    "quantity": "Adet",
+    "buy": "Satın Al",
+    "unavailable": "Stokta olmadığı için satın alınamaz"
   }
 }

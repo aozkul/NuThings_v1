@@ -10,6 +10,7 @@ export type Category = {
 };
 
 export type Product = {
+  stock?: number | null;
   id: string;
   name: string;
   slug?: string | null;

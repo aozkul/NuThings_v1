@@ -20,6 +20,7 @@ const tabs: { key: Tab; label: string; emoji: string }[] = [
 
 // Sidebar’daki harici (route) linkler
 const newsletterNav = [
+  {href: "/admin/stock", label: "Stok Yönetimi", emoji: "📦"},
   {href: "/admin/newsletter", label: "Aboneler", emoji: "📧"},
   {href: "/admin/newsletter/campaign", label: "Kampanyalar", emoji: "📢"},
 ];

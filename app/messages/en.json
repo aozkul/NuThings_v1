@@ -35,5 +35,12 @@
     "sort_price_desc": "Price (High→Low)",
     "sort_most_liked": "Most Liked",
     "sort_admin": "Default"
+  },
+  "product": {
+    "out_of_stock": "Out of stock",
+    "in_stock": "In stock",
+    "quantity": "Quantity",
+    "buy": "Buy",
+    "unavailable": "Unavailable – out of stock"
   }
 }

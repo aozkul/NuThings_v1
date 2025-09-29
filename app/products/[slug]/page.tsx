@@ -11,6 +11,7 @@ import LikeButton from "@/src/components/LikeButton";
 import TrackView from "@/src/components/TrackView";
 import ShareMenu from "@/src/components/ShareMenu";
 import RelatedCarousel from "@/src/components/product/RelatedCarousel";
+import BuyBox from "@/src/components/product/BuyBox";
 
 /** ─────────── SEO ─────────── */
 export async function generateMetadata(
@@ -19,7 +20,7 @@ export async function generateMetadata(
   const {slug} = await params;
   const supabase = await supabaseServer();
 
-  const {data: bySlug} = await supabase.from("products").select("*").eq("slug", slug).single();
+  const {data: bySlug} = await supabase.from("products").select("*, stock").eq("slug", slug).single();
   const fallback = bySlug ? null : await supabase.from("products").select("*").eq("id", slug).single();
   const data: any = (bySlug as Product) || (fallback?.data as Product) || null;
 
@@ -198,6 +199,9 @@ export default async function ProductPage(
               <span className="text-base font-normal text-neutral-600"> €</span>
             </div>
           )}
+
+          <BuyBox productId={product.id} stock={product.stock} price={product.price} />
+
 
           {/* Short description */}
           {product.description && (
