@@ -131,15 +131,15 @@ export default async function Footer() {
       </div>
 
       {/* Legal Links */}
-<div className="container-tight px-4">
-  <div className="flex flex-wrap gap-x-6 gap-y-2 justify-center text-sm text-neutral-600 py-3 border-t">
-    <a className="hover:underline" href="/impressum">Impressum</a>
-    <a className="hover:underline" href="/datenschutz">Datenschutzerklärung</a>
-    <a className="hover:underline" href="/agb">AGB</a>
-    <a className="hover:underline" href="/widerruf">Widerrufsbelehrung</a>
-    <a className="hover:underline" href="/versand-zahlung">Versand & Zahlung</a>
-  </div>
-</div>
+      <div className="container-tight px-4">
+        <div className="flex flex-wrap gap-x-6 gap-y-2 justify-center text-sm text-neutral-600 py-3 border-t">
+          <a className="hover:underline" href="/impressum">Impressum</a>
+          <a className="hover:underline" href="/datenschutz">Datenschutzerklärung</a>
+          <a className="hover:underline" href="/agb">AGB</a>
+          <a className="hover:underline" href="/widerruf">Widerrufsbelehrung</a>
+          <a className="hover:underline" href="/versand-zahlung">Versand & Zahlung</a>
+        </div>
+      </div>
 
       <div className="border-t py-4 text-center text-xs text-neutral-500">
         © {new Date().getFullYear()} NuThings

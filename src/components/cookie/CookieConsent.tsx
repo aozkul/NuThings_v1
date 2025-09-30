@@ -1,5 +1,5 @@
 "use client";
-import { useEffect, useState } from "react";
+import {useEffect, useState} from "react";
 
 const KEY = "cookie-consent-v1";
 
@@ -12,11 +12,11 @@ export default function CookieConsent() {
   }, []);
 
   const accept = () => {
-    localStorage.setItem(KEY, JSON.stringify({ analytics: true, marketing: false, date: Date.now() }));
+    localStorage.setItem(KEY, JSON.stringify({analytics: true, marketing: false, date: Date.now()}));
     setOpen(false);
   };
   const decline = () => {
-    localStorage.setItem(KEY, JSON.stringify({ analytics: false, marketing: false, date: Date.now() }));
+    localStorage.setItem(KEY, JSON.stringify({analytics: false, marketing: false, date: Date.now()}));
     setOpen(false);
   };
 

@@ -18,7 +18,7 @@ export async function generateMetadata() {
   const map = new Map((data || []).map((r) => [r.key, r.value]));
   const title =
     (map.get("home_seo_title") as string) ||
-    "NuThings — Von der Natur auf Ihren Tisch";
+    "NuThings";
   const description =
     (map.get("home_seo_desc") as string) ||
     "Frische Nüsse, türkischer Honig und mehr.";

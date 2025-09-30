@@ -52,5 +52,22 @@
     "stock": "Lager",
     "remove": "Entfernen",
     "button": "Warenkorb"
+  },
+  "cookies_page": {
+    "title": {
+      "de": "Cookies",
+      "tr": "Çerezler",
+      "en": "Cookies"
+    },
+    "subtitle": {
+      "de": "Nutzung von Cookies und Ihre Optionen",
+      "tr": "Çerez kullanımı ve seçenekleriniz",
+      "en": "Use of cookies and your choices"
+    },
+    "types": "Arten von Cookies",
+    "consent": "Einwilligung verwalten",
+    "third": "Drittanbieter",
+    "browser": "Cookies im Browser steuern",
+    "contact": "Kontakt & Verantwortlicher"
   }
 }

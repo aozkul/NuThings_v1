@@ -52,5 +52,22 @@
     "stock": "Stock",
     "remove": "Remove",
     "button": "Cart"
+  },
+  "cookies_page": {
+    "title": {
+      "de": "Cookies",
+      "tr": "Çerezler",
+      "en": "Cookies"
+    },
+    "subtitle": {
+      "de": "Nutzung von Cookies und Ihre Optionen",
+      "tr": "Çerez kullanımı ve seçenekleriniz",
+      "en": "Use of cookies and your choices"
+    },
+    "types": "Types of cookies",
+    "consent": "Manage consent",
+    "third": "Third parties",
+    "browser": "Control cookies in the browser",
+    "contact": "Contact & Controller"
   }
 }
