@@ -10,6 +10,7 @@ import {I18nProvider} from "@/src/i18n/provider";
 import DOMTranslate from "@/src/i18n/DOMTranslate";
 import GoogleAnalytics from "@/src/components/GoogleAnalytics";
 import PageViewTracker from "@/src/components/PageViewTracker"; // opsiyonel
+import CookieConsent from "@/src/components/cookie/CookieConsent";
 
 export const dynamic = "force-dynamic";
 export const revalidate = 0;
@@ -45,6 +46,7 @@ export default async function RootLayout(props: { children: React.ReactNode }) {
     {/* Analytics */}
     <GoogleAnalytics/>
     <PageViewTracker/>
+        <CookieConsent/>
     </body>
     </html>
   );

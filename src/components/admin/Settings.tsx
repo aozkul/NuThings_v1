@@ -890,6 +890,168 @@ export default function AdminSettings() {
               </div>
             )}
           </section>
+        {/* Yasal (Impressum / Datenschutz / Widerruf / Versand & Zahlung) */}
+<section className="rounded-2xl border p-4 md:p-5">
+  <h3 className="font-semibold mb-3">Yasal Bilgiler</h3>
+  <div className="grid md:grid-cols-2 gap-4">
+    {/* Impressum */}
+    <label className="block">
+      <span className="block text-sm font-medium mb-1">Firma / İşletme Adı</span>
+      <input
+        className="w-full border rounded-lg px-3 py-2"
+        value={getVal("legal_company_name")}
+        onChange={(e) => setVal("legal_company_name", (e.target as HTMLInputElement).value)}
+      />
+    </label>
+    <label className="block">
+      <span className="block text-sm font-medium mb-1">Sokak + No</span>
+      <input
+        className="w-full border rounded-lg px-3 py-2"
+        value={getVal("legal_address_street")}
+        onChange={(e) => setVal("legal_address_street", (e.target as HTMLInputElement).value)}
+      />
+    </label>
+    <label className="block">
+      <span className="block text-sm font-medium mb-1">PLZ + Şehir</span>
+      <input
+        className="w-full border rounded-lg px-3 py-2"
+        value={getVal("legal_address_zipcity")}
+        onChange={(e) => setVal("legal_address_zipcity", (e.target as HTMLInputElement).value)}
+      />
+    </label>
+    <label className="block">
+      <span className="block text-sm font-medium mb-1">Telefon</span>
+      <input
+        className="w-full border rounded-lg px-3 py-2"
+        value={getVal("legal_contact_phone")}
+        onChange={(e) => setVal("legal_contact_phone", (e.target as HTMLInputElement).value)}
+      />
+    </label>
+    <label className="block md:col-span-2">
+      <span className="block text-sm font-medium mb-1">E-posta</span>
+      <input
+        type="email"
+        className="w-full border rounded-lg px-3 py-2"
+        value={getVal("legal_contact_email")}
+        onChange={(e) => setVal("legal_contact_email", (e.target as HTMLInputElement).value)}
+      />
+    </label>
+    <label className="block">
+      <span className="block text-sm font-medium mb-1">Ticaret Sicil (opsiyonel)</span>
+      <input
+        className="w-full border rounded-lg px-3 py-2"
+        value={getVal("legal_register")}
+        onChange={(e) => setVal("legal_register", (e.target as HTMLInputElement).value)}
+      />
+    </label>
+    <label className="block">
+      <span className="block text-sm font-medium mb-1">USt-IdNr. (opsiyonel)</span>
+      <input
+        className="w-full border rounded-lg px-3 py-2"
+        value={getVal("legal_vat_id")}
+        onChange={(e) => setVal("legal_vat_id", (e.target as HTMLInputElement).value)}
+      />
+    </label>
+    <label className="block md:col-span-2">
+      <span className="block text-sm font-medium mb-1">İçerikten Sorumlu</span>
+      <input
+        className="w-full border rounded-lg px-3 py-2"
+        value={getVal("legal_content_responsible")}
+        onChange={(e) => setVal("legal_content_responsible", (e.target as HTMLInputElement).value)}
+      />
+    </label>
+
+    {/* Datenschutz Verantwortlicher */}
+    <label className="block">
+      <span className="block text-sm font-medium mb-1">Datenschutz – Ad/Unvan</span>
+      <input
+        className="w-full border rounded-lg px-3 py-2"
+        value={getVal("privacy_controller_name")}
+        onChange={(e) => setVal("privacy_controller_name", (e.target as HTMLInputElement).value)}
+      />
+    </label>
+    <label className="block md:col-span-2">
+      <span className="block text-sm font-medium mb-1">Datenschutz – Adres</span>
+      <input
+        className="w-full border rounded-lg px-3 py-2"
+        value={getVal("privacy_controller_address")}
+        onChange={(e) => setVal("privacy_controller_address", (e.target as HTMLInputElement).value)}
+      />
+    </label>
+    <label className="block md:col-span-2">
+      <span className="block text-sm font-medium mb-1">Datenschutz – E-posta</span>
+      <input
+        type="email"
+        className="w-full border rounded-lg px-3 py-2"
+        value={getVal("privacy_controller_email")}
+        onChange={(e) => setVal("privacy_controller_email", (e.target as HTMLInputElement).value)}
+      />
+    </label>
+
+    {/* Versand & Zahlung */}
+    <label className="block">
+      <span className="block text-sm font-medium mb-1">Gönderim Bölgesi</span>
+      <input
+        className="w-full border rounded-lg px-3 py-2"
+        value={getVal("shipping_area") || "Deutschland"}
+        onChange={(e) => setVal("shipping_area", (e.target as HTMLInputElement).value)}
+      />
+    </label>
+    <label className="block">
+      <span className="block text-sm font-medium mb-1">Teslim Süresi</span>
+      <input
+        className="w-full border rounded-lg px-3 py-2"
+        value={getVal("shipping_time") || "2–4 Werktage"}
+        onChange={(e) => setVal("shipping_time", (e.target as HTMLInputElement).value)}
+      />
+    </label>
+    <label className="block md:col-span-2">
+      <span className="block text-sm font-medium mb-1">Kargo Ücreti</span>
+      <input
+        className="w-full border rounded-lg px-3 py-2"
+        value={getVal("shipping_costs") || "4,90 € pauschal – ab 49 € frei"}
+        onChange={(e) => setVal("shipping_costs", (e.target as HTMLInputElement).value)}
+      />
+    </label>
+    <label className="block md:col-span-2">
+      <span className="block text-sm font-medium mb-1">Ödeme Yöntemleri</span>
+      <input
+        className="w-full border rounded-lg px-3 py-2"
+        value={getVal("payment_methods") || "PayPal"}
+        onChange={(e) => setVal("payment_methods", (e.target as HTMLInputElement).value)}
+      />
+    </label>
+
+    {/* Widerruf iletişim */}
+    <label className="block">
+      <span className="block text-sm font-medium mb-1">Widerruf – Şirket</span>
+      <input
+        className="w-full border rounded-lg px-3 py-2"
+        value={getVal("withdrawal_company")}
+        onChange={(e) => setVal("withdrawal_company", (e.target as HTMLInputElement).value)}
+      />
+    </label>
+    <label className="block md:col-span-2">
+      <span className="block text-sm font-medium mb-1">Widerruf – Adres</span>
+      <input
+        className="w-full border rounded-lg px-3 py-2"
+        value={getVal("withdrawal_address")}
+        onChange={(e) => setVal("withdrawal_address", (e.target as HTMLInputElement).value)}
+      />
+    </label>
+    <label className="block md:col-span-2">
+      <span className="block text-sm font-medium mb-1">Widerruf – E-posta</span>
+      <input
+        type="email"
+        className="w-full border rounded-lg px-3 py-2"
+        value={getVal("withdrawal_email")}
+        onChange={(e) => setVal("withdrawal_email", (e.target as HTMLInputElement).value)}
+      />
+    </label>
+  </div>
+  <p className="text-xs text-neutral-500 mt-3">Bu alanlar /impressum, /datenschutz, /widerruf, /versand-zahlung sayfalarında otomatik görünür.</p>
+</section>
+
         </>
       )}
     </div>

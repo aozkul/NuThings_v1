@@ -52,5 +52,22 @@
     "stock": "Stok",
     "remove": "Kaldır",
     "button": "Sepet"
+  },
+  "cookies_page": {
+    "title": {
+      "de": "Cookies",
+      "tr": "Çerezler",
+      "en": "Cookies"
+    },
+    "subtitle": {
+      "de": "Nutzung von Cookies und Ihre Optionen",
+      "tr": "Çerez kullanımı ve seçenekleriniz",
+      "en": "Use of cookies and your choices"
+    },
+    "types": "Çerez Türleri",
+    "consent": "Onayı yönet",
+    "third": "Üçüncü taraflar",
+    "browser": "Tarayıcıda çerezleri yönet",
+    "contact": "İletişim & Sorumlu"
   }
 }
