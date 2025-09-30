@@ -14,16 +14,24 @@ export default async function Page() {
   const Grid = h("section", {className: "grid md:grid-cols-2 gap-4"},
     h("div", {className: "bg-white border rounded-2xl p-4 md:p-5 shadow-sm"},
       h("h2", {className: "font-semibold text-lg mb-2"}, "Versand"),
-      h("ul", {className: "list-disc pl-5 space-y-1"},
-        h("li", null, h("strong", null, "Versandgebiet:"), " ", (s.shipping_area || "Deutschland")),
-        h("li", null, h("strong", null, "Lieferzeit:"), " ", (s.shipping_time || "2–4 Werktage")),
-        h("li", null, h("strong", null, "Versandkosten:"), " ", (s.shipping_costs || "4,90 € pauschal – ab 49 € frei"))
-      )
+      h("p", null, s.shipping_area || "Lieferungen innerhalb Deutschlands."),
+      h("p", null, s.shipping_time || "Versandzeit in der Regel 2–4 Werktage."),
+      h("p", null, s.shipping_costs || "Ab 49€ versandkostenfrei.")
     ),
     h("div", {className: "bg-white border rounded-2xl p-4 md:p-5 shadow-sm"},
-      h("h2", {className: "font-semibold text-lg mb-2"}, "Zahlung"),
+      h("h2", {className: "font-semibold text-lg mb-2"}, "Zahlungsarten"),
       h("ul", {className: "list-disc pl-5 space-y-1"},
         ...methods.map((m, i) => h("li", {key: i}, m))
+      ),
+      h("p", {className: "text-sm text-muted-foreground mt-2"},
+        "Hinweis: Bei Zahlungen über PayPal gelten die ",
+        h("a", {
+          href: "https://www.paypal.com/de/webapps/mpp/ua/privacy-full",
+          className: "underline",
+          target: "_blank",
+          rel: "noreferrer"
+        }, "Datenschutzhinweise von PayPal"),
+        "."
       )
     )
   );
