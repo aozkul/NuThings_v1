@@ -2,7 +2,7 @@ import Link from "next/link";
 import {supabaseServer} from "@/src/lib/supabaseServer";
 import {MailIcon, InstagramIcon, TwitterIcon, PhoneIcon} from "@/src/components/Icons";
 import NewsletterBox from "@/src/components/footer/NewsletterBox";
-import CookieSettingsLink from "@/src/components/cookie/CookieSettingsLink";
+import CookieSettingsButton from "@/src/components/cookie/CookieSettingsButton";
 
 
 function IconBadge({
@@ -140,8 +140,6 @@ export default async function Footer() {
           <a className="hover:underline" href="/agb">AGB</a>
           <a className="hover:underline" href="/widerruf">Widerrufsbelehrung</a>
           <a className="hover:underline" href="/versand-zahlung">Versand & Zahlung</a>
-          <span className="opacity-50">·</span>
-          <CookieSettingsLink/>
         </div>
       </div>
 

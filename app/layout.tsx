@@ -11,6 +11,8 @@ import DOMTranslate from "@/src/i18n/DOMTranslate";
 import GoogleAnalytics from "@/src/components/GoogleAnalytics";
 import PageViewTracker from "@/src/components/PageViewTracker"; // opsiyonel
 import CookieConsent from "@/src/components/cookie/CookieConsent";
+import CookieFab from "@/src/components/cookie/CookieFab";
+
 
 export const dynamic = "force-dynamic";
 export const revalidate = 0;
@@ -39,6 +41,7 @@ export default async function RootLayout(props: { children: React.ReactNode }) {
       <CartProvider>
         <Navbar/>
         {props.children}
+        <CookieFab/>
         <Footer/>
       </CartProvider>
     </I18nProvider>
@@ -46,7 +49,7 @@ export default async function RootLayout(props: { children: React.ReactNode }) {
     {/* Analytics */}
     <GoogleAnalytics/>
     <PageViewTracker/>
-        <CookieConsent/>
+    <CookieConsent/>
     </body>
     </html>
   );
