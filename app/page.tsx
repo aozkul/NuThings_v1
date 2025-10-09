@@ -135,12 +135,17 @@ export default async function Page() {
     "parallax_message_color",
   ];
 
+  const HOME_KEYS = ["home_show_featured", "home_show_most_liked"] as const;
+
   const {data: settingsRows} = await supabase
     .from("settings")
     .select("key, value")
-    .in("key", PARALLAX_KEYS as any);
+    .in("key", [...PARALLAX_KEYS, ...HOME_KEYS] as any);
 
   const settings = new Map((settingsRows || []).map((r) => [r.key, r.value]));
+
+  const showFeatured = (settings.get("home_show_featured") ?? "true") === "true";
+  const showMostLiked = (settings.get("home_show_most_liked") ?? "true") === "true";
 
   const position = (get(settings, "parallax_position", "after_hero") ||
     "after_hero") as "after_hero" | "after_featured" | "after_testimonials";
@@ -253,16 +258,20 @@ export default async function Page() {
       {position === "after_hero" && Parallax}
 
       {/* Öne Çıkan Ürünler – oklar + otomatik kaydırma */}
+      {showFeatured && (
       <div className="container-tight my-12">
         <FeaturedCarousel/>
       </div>
+      )}
 
       {position === "after_featured" && Parallax}
 
       {/* En Çok Beğenilen – oklar + otomatik kaydırma */}
+      {showMostLiked && (
       <div className="container-tight my-12">
         <MostLikedCarousel/>
       </div>
+      )}
 
       <TestimonialsSection/>
 

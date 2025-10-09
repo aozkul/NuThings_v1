@@ -234,6 +234,8 @@ export default function AdminSettings() {
     map["parallax_block_align"] ??= "center";
     map["parallax_underline_gradient"] ??= "none";
     map["parallax_panel_style"] ??= "none";
+    map["home_show_featured"] ??= "true";
+    map["home_show_most_liked"] ??= "true";
     map["social_email"] ??= "";
     map["social_instagram"] ??= "";
     map["social_phone"] ??= "";
@@ -281,6 +283,8 @@ export default function AdminSettings() {
 
   /** ----- helpers ----- */
   const getVal = (k: string) => rows[k] ?? "";
+  const getBool = (k: string) => (rows[k] ?? "true") === "true";
+  const setBool = (k: string, v: boolean) => setVal(k, v ? "true" : "false");
   const setVal = (k: string, v: string) => setRows(p => ({...p, [k]: v}));
 
   const placeCaretEnd = (node: HTMLElement | null) => {
@@ -629,7 +633,8 @@ export default function AdminSettings() {
 
   /** ----- Render ----- */
   return (
-    <div className="space-y-8">
+    <>
+      <div className="space-y-8">
       {/* Üst bar + durum */}
       <div className="rounded-2xl border p-4 md:p-5 bg-white/60 backdrop-blur">
         <div className="flex flex-col gap-3">
@@ -836,7 +841,31 @@ export default function AdminSettings() {
             {/* Sosyal Linkler */}
             {/*<div className="rounded-2xl border p-4 md:p-6">*/}
             {/*  <h3 className="text-lg font-semibold mb-3">Sosyal Linkler</h3>*/}
-            {/*  <div className="grid md:grid-cols-2 gap-4">*/}
+            {/*  */}
+
+          {/* ----- Anasayfa Bölümleri (Toggle) ----- */}
+          <div className="rounded-2xl border p-4 md:p-6 bg-white space-y-4">
+            <div className="text-lg font-semibold">Anasayfa Bölümleri</div>
+            <label className="flex items-center gap-3">
+              <input
+                type="checkbox"
+                className="h-5 w-5"
+                checked={getBool("home_show_featured")}
+                onChange={(e) => setBool("home_show_featured", (e.currentTarget as HTMLInputElement).checked)}
+              />
+              <span>Öne Çıkanlar (Featured)</span>
+            </label>
+
+            <label className="flex items-center gap-3">
+              <input
+                type="checkbox"
+                className="h-5 w-5"
+                checked={getBool("home_show_most_liked")}
+                onChange={(e) => setBool("home_show_most_liked", (e.currentTarget as HTMLInputElement).checked)}
+              />
+              <span>En Çok Beğenilenler (Most Liked)</span>
+            </label>
+          </div>
             {/*    <label className="block">*/}
             {/*      <span className="block text-sm font-medium mb-1">Instagram URL</span>*/}
             {/*      <input*/}
@@ -862,34 +891,34 @@ export default function AdminSettings() {
             {/*</div>*/}
 
             <h3 className="text-lg font-semibold mb-3">Diğer Ayarlar</h3>
-            {Object.keys(rows).filter(k => !k.startsWith("parallax_") && k !== RICH_KEYS.title && k !== RICH_KEYS.message).length === 0 ? (
-              <p className="text-sm text-neutral-500">Gösterilecek başka ayar yok.</p>
-            ) : (
-              <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-                {Object.keys(rows)
-                  .filter(k => !k.startsWith("parallax_") && k !== RICH_KEYS.title && k !== RICH_KEYS.message)
-                  .sort()
-                  .map((k) => (
-                    <label key={k} className="block">
-                      <span className="block text-sm font-medium mb-1">{k}</span>
-                      {(getVal(k).length > 120) ? (
-                        <textarea
-                          className="w-full border rounded-lg px-3 py-2 min-h-[90px]"
-                          value={getVal(k)}
-                          onChange={(e) => setVal(k, e.target.value)}
-                        />
-                      ) : (
-                        <input
-                          className="w-full border rounded-lg px-3 py-2"
-                          value={getVal(k)}
-                          onChange={(e) => setVal(k, e.target.value)}
-                        />
-                      )}
-                    </label>
-                  ))}
-              </div>
-            )}
-          </section>
+{Object.keys(rows).filter(k => !k.startsWith("parallax_") && k !== RICH_KEYS.title && k !== RICH_KEYS.message).length === 0 ? (
+  <p className="text-sm text-neutral-500">Gösterilecek başka ayar yok.</p>
+) : (
+  <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+    {Object.keys(rows)
+      .filter(k => !k.startsWith("parallax_") && k !== RICH_KEYS.title && k !== RICH_KEYS.message)
+      .sort()
+      .map((k) => (
+        <label key={k} className="block">
+          <span className="block text-sm font-medium mb-1">{k}</span>
+          {(getVal(k).length > 120) ? (
+            <textarea
+              className="w-full border rounded-lg px-3 py-2 min-h-[90px]"
+              value={getVal(k)}
+              onChange={(e) => setVal(k, (e.target as HTMLTextAreaElement).value)}
+            />
+          ) : (
+            <input
+              className="w-full border rounded-lg px-3 py-2"
+              value={getVal(k)}
+              onChange={(e) => setVal(k, (e.target as HTMLInputElement).value)}
+            />
+          )}
+        </label>
+      ))}
+  </div>
+)}
+</section>
         {/* Yasal (Impressum / Datenschutz / Widerruf / Versand & Zahlung) */}
 <section className="rounded-2xl border p-4 md:p-5">
   <h3 className="font-semibold mb-3">Yasal Bilgiler</h3>
@@ -1055,6 +1084,7 @@ export default function AdminSettings() {
         </>
       )}
     </div>
+    </>
   );
 }
 
