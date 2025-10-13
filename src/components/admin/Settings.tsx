@@ -239,7 +239,7 @@ export default function AdminSettings() {
     map["social_email"] ??= "";
     map["social_instagram"] ??= "";
     map["social_phone"] ??= "";
-    map["social_twitter"] ??= "";
+    map["social_facebook"] ??= "";
 
     // Eski 1–7 → px
     [STYLE_KEYS_TITLE.size, STYLE_KEYS_MSG.size].forEach((k) => {

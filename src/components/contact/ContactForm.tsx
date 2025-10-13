@@ -4,7 +4,7 @@
 import {useEffect, useState} from "react";
 import {supabase} from "@/src/lib/supabaseClient";
 import {useI18n} from "@/src/i18n/provider";
-import {MailIcon, PhoneIcon, InstagramIcon, TwitterIcon} from "@/src/components/Icons";
+import {MailIcon, PhoneIcon, InstagramIcon, FacebookIcon} from "@/src/components/Icons";
 
 type SettingRow = { key: string; value: string | null };
 
@@ -23,14 +23,14 @@ export default function ContactForm() {
   const [contactEmail, setContactEmail] = useState<string>("");
   const [contactPhone, setContactPhone] = useState<string>("");
   const [instagramUrl, setInstagramUrl] = useState<string>("");
-  const [twitterUrl, setTwitterUrl] = useState<string>("");
+  const [facebookUrl, setTwitterUrl] = useState<string>("");
 
   useEffect(() => {
     let alive = true;
     (async () => {
       try {
         // KV şema: settings(key, value, ...)
-        const KEYS = ["social_email", "social_phone", "social_instagram", "social_twitter"];
+        const KEYS = ["social_email", "social_phone", "social_instagram", "social_facebook"];
         const {data, error} = await supabase
           .from("settings")
           .select("key,value")
@@ -49,7 +49,7 @@ export default function ContactForm() {
         setContactEmail(map.get("social_email") ?? "");
         setContactPhone(map.get("social_phone") ?? "");
         setInstagramUrl(map.get("social_instagram") ?? "");
-        setTwitterUrl(map.get("social_twitter") ?? "");
+        setTwitterUrl(map.get("social_facebook") ?? "");
       } catch {
         // sessiz geç
       }
@@ -193,12 +193,12 @@ export default function ContactForm() {
             </div>
           )}
 
-          {/* Twitter / X */}
-          {twitterUrl && (
+          {/* Facebook */}
+          {facebookUrl && (
             <div className="flex items-center gap-2">
-              <TwitterIcon className="h-4 w-4"/>
-              <a href={twitterUrl} target="_blank" rel="noreferrer">
-                {T(messages.common, "twitter", "Twitter")}
+              <FacebookIcon className="h-4 w-4"/>
+              <a href={facebookUrl} target="_blank" rel="noreferrer">
+                {T(messages.common, "facebook", "Twitter")}
               </a>
             </div>
           )}

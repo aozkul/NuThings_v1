@@ -3,7 +3,7 @@ import { useEffect, useState } from "react";
 import { supabase } from "@/src/lib/supabaseClient";
 type Row = { key: string; value: string };
 
-const KEYS = ["parallax_title","parallax_message","about_text","social_instagram","social_twitter","social_email","social_phone"] as const;
+const KEYS = ["parallax_title","parallax_message","about_text","site_tagline","site_tagline2","social_instagram","social_facebook","social_email","social_phone"] as const;
 
 export default function AdminSettings(){
   const [rows, setRows] = useState<Row[]>([]);
