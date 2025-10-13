@@ -259,21 +259,21 @@ export default async function Page() {
 
       {/* Öne Çıkan Ürünler – oklar + otomatik kaydırma */}
       {showFeatured && (
-      <div className="container-tight my-12">
-        <FeaturedCarousel/>
-      </div>
+        <div className="container-tight my-12">
+          <FeaturedCarousel/>
+        </div>
       )}
 
       {position === "after_featured" && Parallax}
 
       {/* En Çok Beğenilen – oklar + otomatik kaydırma */}
       {showMostLiked && (
-      <div className="container-tight my-12">
-        <MostLikedCarousel/>
-      </div>
+        <div className="container-tight my-12">
+          <MostLikedCarousel/>
+        </div>
       )}
 
-      <TestimonialsSection/>
+      {/*<TestimonialsSection/>*/}
 
       {position === "after_testimonials" && Parallax}
     </div>
