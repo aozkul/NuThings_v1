@@ -22,3 +22,9 @@ npm run dev
 - İleride istersen `next/image`'a geçiririz (LCP için daha iyi). O zaman `next.config.js` içine Supabase domain'i eklenmeli.
 - Admin > Metrics sekmesi `rpc(get_metrics)` varsa doldurur, yoksa boş kalabilir. Ekleriz.
 - Eski projedeki ekstra stilleri birebir taşımak istersen, CSS/WIP taleplerini yaz, birlikte ince ayar yapalım.
+
+
+## Analytics
+- Run the SQL in `supabase/migrations/2025-10-10_analytics_visits.sql` in Supabase.
+- Deploy. The site will POST to `/api/analytics/visit` on first view per path per session.
+- Admin → Analitik sekmesinden grafiklere bakabilirsiniz.

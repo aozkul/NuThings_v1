@@ -7,12 +7,14 @@ import AdminOverview from "@/src/components/admin/Overview";
 import AdminSettings from "@/src/components/admin/Settings";
 import AdminCategories from "@/src/components/admin/Categories";
 import AdminProducts from "@/src/components/admin/Products";
+import AdminAnalytics from "@/src/components/admin/Analytics";
 import {GridIcon} from "@/src/components/Icons";
 
-type Tab = "overview" | "categories" | "products" | "settings";
+type Tab = "overview" | "categories" | "products" | "settings" | "analytics";
 
 const tabs: { key: Tab; label: string; emoji: string }[] = [
   {key: "overview", label: "Genel Bakış", emoji: "📊"},
+  {key: "analytics", label: "Analitik", emoji: "📈"},
   {key: "categories", label: "Kategoriler", emoji: "🗂️"},
   {key: "products", label: "Ürünler", emoji: "🧺"},
   {key: "settings", label: "Ayarlar", emoji: "⚙️"},
@@ -131,6 +133,10 @@ export default function AdminPanel() {
         return <AdminProducts/>;
       case "settings":
         return <AdminSettings/>;
+      case "analytics":
+        return <AdminAnalytics/>;
+      default:
+        return <AdminOverview/>;
     }
   };
 

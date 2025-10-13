@@ -10,6 +10,7 @@ import {I18nProvider} from "@/src/i18n/provider";
 import DOMTranslate from "@/src/i18n/DOMTranslate";
 import GoogleAnalytics from "@/src/components/GoogleAnalytics";
 import PageViewTracker from "@/src/components/PageViewTracker"; // opsiyonel
+import VisitTracker from "@/src/components/VisitTracker";
 import CookieConsent from "@/src/components/cookie/CookieConsent";
 import CookieFab from "@/src/components/cookie/CookieFab";
 
@@ -49,6 +50,7 @@ export default async function RootLayout(props: { children: React.ReactNode }) {
     {/* Analytics */}
     <GoogleAnalytics/>
     <PageViewTracker/>
+    <VisitTracker/>
     <CookieConsent/>
     </body>
     </html>
