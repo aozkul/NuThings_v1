@@ -6,6 +6,23 @@ type Daily = { day: string; count: number };
 type Bucket = { key: string; count: number };
 type Totals = { total: number; uniques: number };
 
+
+// ---------- responsive helpers ----------
+function useChartHeight() {
+  const [h, setH] = useState(260);
+  useEffect(() => {
+    const calc = () => {
+      const w = typeof window !== "undefined" ? window.innerWidth : 1280;
+      // Taller charts on small screens for legibility
+      const next = w < 640 ? 340 : w < 1024 ? 300 : 260;
+      setH(next);
+    };
+    calc();
+    window.addEventListener("resize", calc);
+return () => window.removeEventListener("resize", calc);
+  }, []);
+  return h;
+}
 type RawRow = {
   ts: string;
   country?: string;
@@ -193,7 +210,7 @@ function PremiumLine({data, height = 260}: { data: Daily[]; height?: number }) {
           return (
             <g key={i}>
               <line x1={PAD} x2={W - PAD} y1={y} y2={y} stroke="#eef2f7"/>
-              <text x={PAD - 8} y={y + 4} fontSize="10" fill="#6b7280" textAnchor="end">
+              <text x={PAD - 8} y={y + 4} fontSize={Math.max(10, Math.round(H/26))} fill="#6b7280" textAnchor="end">
                 {t}
               </text>
             </g>
@@ -223,7 +240,7 @@ function PremiumLine({data, height = 260}: { data: Daily[]; height?: number }) {
               <text
                 x={clamp(last.x, PAD + 24, W - 56)}
                 y={last.y - 16}
-                fontSize="10"
+                fontSize={Math.max(10, Math.round(H/26))}
                 fill="#fff"
                 textAnchor="middle"
               >
@@ -237,7 +254,7 @@ function PremiumLine({data, height = 260}: { data: Daily[]; height?: number }) {
           const idx = data.length - 8 + i;
           const x = PAD + (idx * (W - 2 * PAD)) / denom;
           return (
-            <text key={i} x={x} y={H - PAD + 16} fontSize="10" fill="#6b7280" textAnchor="middle">
+            <text key={i} x={x} y={H - PAD + 16} fontSize={Math.max(10, Math.round(H/26))} fill="#6b7280" textAnchor="middle">
               {d.day.slice(5)}
             </text>
           );
@@ -286,7 +303,7 @@ function PremiumBars({
           return (
             <g key={i}>
               <line x1={PAD} x2={W - PAD} y1={y} y2={y} stroke="#eef2f7"/>
-              <text x={PAD - 8} y={y + 4} fontSize="10" fill="#6b7280" textAnchor="end">
+              <text x={PAD - 8} y={y + 4} fontSize={Math.max(10, Math.round(H/26))} fill="#6b7280" textAnchor="end">
                 {t}
               </text>
             </g>
@@ -305,13 +322,13 @@ function PremiumBars({
           return (
             <g key={i}>
               <rect x={x} y={y} width={barW} height={h} rx="8" fill="url(#bar-grad)"/>
-              <text x={x + barW / 2} y={y - 6} fontSize="10" fill="#111827" textAnchor="middle">
+              <text x={x + barW / 2} y={y - 6} fontSize={Math.max(10, Math.round(H/26))} fill="#111827" textAnchor="middle">
                 {d.count}
               </text>
               <text
                 x={x + barW / 2}
                 y={H - PAD + 18}
-                fontSize="10"
+                fontSize={Math.max(10, Math.round(H/26))}
                 fill="#374151"
                 textAnchor="middle"
               >
@@ -378,11 +395,11 @@ function Donut({
         ))}
         {/* merkez etiket */}
         <circle cx={cx} cy={cy} r={ir * 0.92} fill="white"/>
-        <text x={cx} y={cy - 4} textAnchor="middle" fontSize="18" className="fill-black font-semibold">
+        <text x={cx} y={cy - 4} textAnchor="middle" fontSize={Math.max(18, Math.round(H/14))} className="fill-black font-semibold">
           {total.toLocaleString()}
         </text>
         {totalLabel && (
-          <text x={cx} y={cy + 14} textAnchor="middle" fontSize="11" className="fill-gray-500">
+          <text x={cx} y={cy + 14} textAnchor="middle" fontSize={Math.max(11, Math.round(H/24))} className="fill-gray-500">
             {totalLabel}
           </text>
         )}
@@ -413,6 +430,7 @@ export default function AdminAnalytics() {
 
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState<string | null>(null);
+  const chartH = useChartHeight();
 
   useEffect(() => {
     (async () => {
@@ -532,15 +550,15 @@ export default function AdminAnalytics() {
 
       {/* mevcut 3 grafik */}
       <Card title="Son 30 Gün Günlük Ziyaret">
-        <PremiumLine data={daily}/>
+        <div className="h-auto"><PremiumLine data={daily} height={chartH} /></div>
       </Card>
 
       <Card title="Ülkelere Göre Ziyaretler (Top 12)">
-        <PremiumBars data={countries} color="#10b981" labelFormatter={(k) => countryLabel(k)}/>
+        <PremiumBars data={countries} color="#10b981" labelFormatter={(k) => countryLabel(k)} height={chartH} />
       </Card>
 
       <Card title="En Çok Ziyaret Alan Sayfalar (Top 12)">
-        <PremiumBars data={pages} color="#3b82f6" labelFormatter={(k) => readablePath(k)}/>
+        <PremiumBars data={pages} color="#3b82f6" labelFormatter={(k) => readablePath(k)} height={chartH}/>
       </Card>
 
       {/* 🔥 Yeni ürün grafiği */}
@@ -569,7 +587,7 @@ export default function AdminAnalytics() {
         <PremiumBars
           data={sourceBars}
           color="#ef4444"
-          labelFormatter={(k) => k}
+          labelFormatter={(k) => k} height={chartH}
         />
       </Card>
 
@@ -577,7 +595,7 @@ export default function AdminAnalytics() {
         <Donut
           items={newVsReturning}
           colors={["#60a5fa", "#111827"]}
-          totalLabel="Ziyaretçi"
+          totalLabel="Ziyaretçi" height={Math.max(220, Math.round(chartH*0.9))}
         />
       </Card>
     </div>
