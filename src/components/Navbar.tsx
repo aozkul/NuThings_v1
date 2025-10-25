@@ -109,18 +109,18 @@ export default function Navbar() {
               )}
             </nav>
 
-            {/* Desktop actions: Admin → sağında Cart */}
+            {/*Desktop actions: Admin → sağında Cart*/}
             <div className="hidden md:flex items-center gap-3">
               <LocaleSwitcher/>
-              <Link
-                href="/admin"
-                className="inline-flex items-center gap-2 px-2 py-2 rounded-xl border border-neutral-200 bg-white shadow-sm hover:bg-neutral-50 focus:outline-none focus:ring-2 focus:ring-neutral-300"
-              >
-                <IconBadge bg="bg-violet-50" color="text-violet-600">
-                  <ShieldIcon className="h-4 w-4"/>
-                </IconBadge>
-                <span className="text-sm font-medium">Admin</span>
-              </Link>
+              {/*<Link*/}
+              {/*  href="/admin"*/}
+              {/*  className="inline-flex items-center gap-2 px-2 py-2 rounded-xl border border-neutral-200 bg-white shadow-sm hover:bg-neutral-50 focus:outline-none focus:ring-2 focus:ring-neutral-300"*/}
+              {/*>*/}
+              {/*  <IconBadge bg="bg-violet-50" color="text-violet-600">*/}
+              {/*    <ShieldIcon className="h-4 w-4"/>*/}
+              {/*  </IconBadge>*/}
+              {/*  <span className="text-sm font-medium">Admin</span>*/}
+              {/*</Link>*/}
               <CartButton/>
             </div>
 
@@ -191,18 +191,18 @@ export default function Navbar() {
             </div>
 
             {/* Admin */}
-            <div className="mt-auto pt-2 border-t border-neutral-200">
-              <Link
-                href="/admin"
-                onClick={close}
-                className="w-full inline-flex items-center justify-center gap-2 rounded-xl border border-neutral-200 bg-white px-3 py-3 text-sm font-medium shadow-sm hover:bg-neutral-50"
-              >
-                <IconBadge bg="bg-violet-50" color="text-violet-600">
-                  <ShieldIcon className="h-4 w-4"/>
-                </IconBadge>
-                Admin
-              </Link>
-            </div>
+            {/*<div className="mt-auto pt-2 border-t border-neutral-200">*/}
+            {/*  <Link*/}
+            {/*    href="/admin"*/}
+            {/*    onClick={close}*/}
+            {/*    className="w-full inline-flex items-center justify-center gap-2 rounded-xl border border-neutral-200 bg-white px-3 py-3 text-sm font-medium shadow-sm hover:bg-neutral-50"*/}
+            {/*  >*/}
+            {/*    <IconBadge bg="bg-violet-50" color="text-violet-600">*/}
+            {/*      <ShieldIcon className="h-4 w-4"/>*/}
+            {/*    </IconBadge>*/}
+            {/*    Admin*/}
+            {/*  </Link>*/}
+            {/*</div>*/}
           </nav>
         </div>
       </div>
