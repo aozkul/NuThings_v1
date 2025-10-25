@@ -112,7 +112,7 @@ export default function Navbar() {
 
             {/*Desktop actions: Admin → sağında Cart*/}
             <div className="hidden md:flex items-center gap-3">
-              <LocaleSwitcher/>
+              {/*<LocaleSwitcher/>*/}
               {/*<Link*/}
               {/*  href="/admin"*/}
               {/*  className="inline-flex items-center gap-2 px-2 py-2 rounded-xl border border-neutral-200 bg-white shadow-sm hover:bg-neutral-50 focus:outline-none focus:ring-2 focus:ring-neutral-300"*/}
@@ -170,7 +170,7 @@ export default function Navbar() {
                 ✕
               </button>
               <div className="flex items-center gap-2">
-                <LocaleSwitcher/>
+                {/*<LocaleSwitcher/>*/}
                 {/* Sepete basınca menü kapansın */}
                 <CartButton onClickBefore={close}/>
               </div>
