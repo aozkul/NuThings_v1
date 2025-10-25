@@ -33,11 +33,12 @@ export default function FilterBar({
   selectedSort?: SortKey;
 }) {
   const router = useRouter();
-  const params = useSearchParams();
+  const paramsRaw = useSearchParams();
+  const params = paramsRaw ?? new URLSearchParams();
 
   // URL’den oku; yoksa prop’a düş
-  const urlCategory = params.get("category_id") ?? "";
-  const urlSort = (params.get("sort") as SortKey | null) ?? null;
+  const urlCategory = (params).get("category_id") ?? "";
+  const urlSort = ((params).get("sort") as SortKey | null) ?? null;
 
   const currentCategory = urlCategory || selectedCategoryId || "";
   const currentSort: SortKey = urlSort || selectedSort || "most_liked";

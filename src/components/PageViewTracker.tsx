@@ -4,7 +4,8 @@ import {usePathname, useSearchParams} from "next/navigation";
 import {useEffect} from "react";
 
 export default function PageViewTracker() {
-    const pathname = usePathname();
+    const pathnameRaw = usePathname();
+  const pathname = pathnameRaw ?? '';
     const searchParams = useSearchParams();
 
     useEffect(() => {

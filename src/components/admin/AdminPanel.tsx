@@ -31,7 +31,8 @@ export default function AdminPanel() {
   const [session, setSession] = useState<any>(null);
   const [tab, setTab] = useState<Tab>("overview");
   const [menuOpen, setMenuOpen] = useState(false);
-  const pathname = usePathname();
+  const pathnameRaw = usePathname();
+  const pathname = pathnameRaw ?? '';
 
   // auth
   useEffect(() => {
@@ -142,7 +143,7 @@ export default function AdminPanel() {
 
   // Sidebar item (iç sekmeler)
   const Item = ({t}: { t: (typeof tabs)[number] }) => {
-    const active = tab === t.key && !pathname.startsWith("/admin/newsletter");
+    const active = tab === t.key && !(pathname).startsWith("/admin/newsletter");
     return (
       <button
         onClick={() => {
@@ -163,7 +164,7 @@ export default function AdminPanel() {
 
   // Sidebar item (harici linkler)
   const LinkItem = ({href, label, emoji}: { href: string; label: string; emoji: string }) => {
-    const active = pathname === href || pathname.startsWith(href + "/");
+    const active = pathname === href || (pathname).startsWith(href + "/");
     return (
       <Link
         href={href}
@@ -233,7 +234,7 @@ export default function AdminPanel() {
               {/* İç sekmeler (overview/categories/products/settings) için burada render ediyoruz.
                   Newsletter sayfalarına gidildiğinde bu component yine layout içinde kalır,
                   ilgili route kendi içeriğini gösterir. */}
-              {!pathname.startsWith("/admin/newsletter") && render()}
+              {!(pathname).startsWith("/admin/newsletter") && render()}
             </section>
           </div>
         </div>
