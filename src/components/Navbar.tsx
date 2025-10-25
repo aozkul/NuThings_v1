@@ -17,7 +17,8 @@ type Cat = Pick<Category, "id" | "name" | "slug"> & { position?: number | null }
 export default function Navbar() {
   const [open, setOpen] = useState(false);
   const [cats, setCats] = useState<Cat[]>([]);
-  const pathname = usePathname();
+  const pathnameRaw = usePathname();
+  const pathname = pathnameRaw ?? '';
   const btnRef = useRef<HTMLButtonElement | null>(null);
   const firstLinkRef = useRef<HTMLAnchorElement | null>(null);
 

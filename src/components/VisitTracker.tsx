@@ -7,7 +7,8 @@ import {usePathname, useSearchParams} from "next/navigation";
  * Override / debug yoktur; ülke tespiti tamamen sunucudaki edge/headers'a göre yapılır.
  */
 export default function VisitTracker() {
-  const pathname = usePathname();
+  const pathnameRaw = usePathname();
+  const pathname = pathnameRaw ?? '';
   const search = useSearchParams();
 
   useEffect(() => {
