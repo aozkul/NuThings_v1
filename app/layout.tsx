@@ -31,7 +31,6 @@ export default async function RootLayout(props: { children: React.ReactNode }) {
   try {
     messages = (await import(`../messages/${locale}.json`)).default;
   } catch {
-    messages = {};
   }
 
   return (

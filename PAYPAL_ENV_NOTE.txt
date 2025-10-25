@@ -1,0 +1,8 @@
+
+IMPORTANT (SANDBOX):
+- Use SANDBOX merchant keys for BOTH:
+  NEXT_PUBLIC_PAYPAL_CLIENT_ID
+  PAYPAL_CLIENT_ID + PAYPAL_CLIENT_SECRET
+- And set PAYPAL_ENV=sandbox
+- Login with a SANDBOX BUYER account (sb-xxxx@personal.example.com), not your real email.
+- If PayPal still asks for card/bank after login, assign balance or a card to the sandbox buyer in developer dashboard.

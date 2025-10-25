@@ -47,7 +47,8 @@ function NavLink({
 }
 
 export default function NewsletterLayout({children}: { children: React.ReactNode }) {
-    const pathname = usePathname();
+    const pathnameRaw = usePathname();
+  const pathname = pathnameRaw ?? '';
 
     const isActive = (href: string) => {
         // /admin rotaları query ile tab değiştiriyor; burada sadece path'e bakıyoruz.
