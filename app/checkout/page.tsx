@@ -253,15 +253,15 @@ export default function CheckoutPage() {
                   </div>
                 )}
               </div>
-              <button
-                disabled={!valid || placing}
-                onClick={placeOrder}
-                className="mt-3 w-full h-10 rounded-md border text-sm disabled:opacity-60"
-                title={!valid ? tt('fill_form_first') : tt('place_order_test')}
-              >
-                {placing ? tt('processing') : tt('place_order_test')}
-              </button>
-              <p className="text-xs text-neutral-500 mt-2">{tt('stock_note')}</p>
+              {/*<button*/}
+              {/*  disabled={!valid || placing}*/}
+              {/*  onClick={placeOrder}*/}
+              {/*  className="mt-3 w-full h-10 rounded-md border text-sm disabled:opacity-60"*/}
+              {/*  title={!valid ? tt('fill_form_first') : tt('place_order_test')}*/}
+              {/*>*/}
+              {/*  {placing ? tt('processing') : tt('place_order_test')}*/}
+              {/*</button>*/}
+              {/*<p className="text-xs text-neutral-500 mt-2">{tt('stock_note')}</p>*/}
             </section>
           </aside>
         </div>
