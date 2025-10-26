@@ -46,12 +46,12 @@ export default function ProductGallery({
   return (
     <div className="rounded-2xl border overflow-hidden bg-white">
       {/* Main viewer */}
-      <div className="relative bg-neutral-50">
+      <div className="relative bg-neutral-50 flex items-center justify-center">
         {/* eslint-disable-next-line @next/next/no-img-element */}
         <img
           src={list[active].image_url}
           alt={list[active].alt || "Ürün görseli"}
-          className="w-full object-cover aspect-[4/3] md:aspect-[5/4] hover:opacity-99 transition"
+          className="w-full h-auto max-h-[70vh] object-contain hover:opacity-99 transition"
           loading="eager"
           decoding="async"
         />
