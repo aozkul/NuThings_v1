@@ -13,6 +13,9 @@ export default function ProductGallery({
   mainAlt?: string | null;
   images?: Img[] | null;
 }) {
+  // Fullscreen viewer state
+  const [isOpen, setIsOpen] = useState(false);
+
   // Build list: main first + extra images (dedupe by url)
   const list = useMemo(() => {
     const arr: Img[] = [];
@@ -32,7 +35,10 @@ export default function ProductGallery({
       if (e.key === "ArrowLeft") setActive((v) => Math.max(v - 1, 0));
     };
     window.addEventListener("keydown", onKey);
-    return () => window.removeEventListener("keydown", onKey);
+    const onEsc = (e: KeyboardEvent) => { if (e.key === "Escape") setIsOpen(false); };
+    window.addEventListener("keydown", onEsc);
+
+    return () => { window.removeEventListener("keydown", onKey); window.removeEventListener("keydown", onEsc); };
   }, [list.length]);
 
   if (!list.length) {
@@ -46,7 +52,7 @@ export default function ProductGallery({
   return (
     <div className="rounded-2xl border overflow-hidden bg-white">
       {/* Main viewer */}
-      <div className="relative bg-neutral-50 flex items-center justify-center">
+      <div className="relative bg-neutral-50 flex items-center justify-center" onClick={() => setIsOpen(true)} role="button" aria-label="Görseli tam ekran aç">
         {/* eslint-disable-next-line @next/next/no-img-element */}
         <img
           src={list[active].image_url}
@@ -54,13 +60,13 @@ export default function ProductGallery({
           className="w-full h-auto max-h-[70vh] object-contain hover:opacity-99 transition"
           loading="eager"
           decoding="async"
-        />
+          />
         {list.length > 1 && (
           <>
             <button
               type="button"
               aria-label="Önceki görsel"
-              onClick={() => setActive((a) => Math.max(0, a - 1))}
+              onClick={(e) => { e.stopPropagation(); setActive((a) => Math.max(0, a - 1)); }}
               className="absolute left-2 top-1/2 -translate-y-1/2 h-9 w-9 rounded-full bg-white/90 border shadow hover:bg-white"
             >
               ‹
@@ -68,7 +74,7 @@ export default function ProductGallery({
             <button
               type="button"
               aria-label="Sonraki görsel"
-              onClick={() => setActive((a) => Math.min(list.length - 1, a + 1))}
+              onClick={(e) => { e.stopPropagation(); setActive((a) => Math.min(list.length - 1, a + 1)); }}
               className="absolute right-2 top-1/2 -translate-y-1/2 h-9 w-9 rounded-full bg-white/90 border shadow hover:bg-white"
             >
               ›
@@ -76,6 +82,57 @@ export default function ProductGallery({
           </>
         )}
       </div>
+
+
+      {/* Fullscreen Modal */}
+      {isOpen && (
+        <div
+          className="fixed inset-0 z-50 bg-black/90 flex items-center justify-center p-4"
+          onClick={() => setIsOpen(false)}
+          role="dialog"
+          aria-modal="true"
+        >
+          {/* Stop click from bubbling when clicking on image itself */}
+          <div className="relative max-w-[95vw] max-h-[95vh]" onClick={(e) => e.stopPropagation()}>
+
+            {/* Modal nav arrows */}
+            {list.length > 1 && (
+              <>
+                <button
+                  type="button"
+                  aria-label="Önceki görsel (modal)"
+                  onClick={(e) => { e.stopPropagation(); setActive((a) => Math.max(0, a - 1)); }}
+                  className="absolute left-4 top-1/2 -translate-y-1/2 h-10 w-10 rounded-full bg-white/90 border shadow hover:bg-white"
+                >‹</button>
+                <button
+                  type="button"
+                  aria-label="Sonraki görsel (modal)"
+                  onClick={(e) => { e.stopPropagation(); setActive((a) => Math.min(list.length - 1, a + 1)); }}
+                  className="absolute right-4 top-1/2 -translate-y-1/2 h-10 w-10 rounded-full bg-white/90 border shadow hover:bg-white"
+                >›</button>
+              </>
+            )}
+    
+            {/* eslint-disable-next-line @next/next/no-img-element */}
+            <img
+              src={list[active].image_url}
+              alt={list[active].alt || "Ürün görseli tam ekran"}
+              className="max-h-[95vh] max-w-[95vw] object-contain"
+              loading="eager"
+              decoding="async"
+            />
+            <button
+              type="button"
+              onClick={() => setIsOpen(false)}
+              aria-label="Kapat"
+              className="absolute -top-3 -right-3 h-9 w-9 rounded-full bg-white text-black grid place-items-center shadow border"
+              title="Kapat (Esc)"
+            >
+              ✕
+            </button>
+          </div>
+        </div>
+      )}
 
       {/* Thumbnails */}
       {list.length > 1 && (
@@ -97,7 +154,7 @@ export default function ProductGallery({
                   className="h-16 w-20 md:h-20 md:w-24 object-cover"
                   loading="lazy"
                   decoding="async"
-                />
+          />
               </button>
             ))}
           </div>
