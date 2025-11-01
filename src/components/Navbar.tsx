@@ -11,8 +11,9 @@ import {IconBadge} from "@/src/components/IconBadge";
 import LocaleSwitcher from "@/src/components/LocaleSwitcher";
 import {supabase} from "@/src/lib/supabaseClient";
 import type {Category} from "@/src/lib/types";
-import { Pinyon_Script } from "next/font/google";
-const pinyon = Pinyon_Script({ subsets: ["latin"], weight: "400" });
+import {Pinyon_Script} from "next/font/google";
+
+const pinyon = Pinyon_Script({subsets: ["latin"], weight: "400"});
 
 type Cat = Pick<Category, "id" | "name" | "slug"> & { position?: number | null };
 
@@ -77,12 +78,17 @@ export default function Navbar() {
         <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
           <div className="flex items-center justify-between">
             {/* Logo */}
-            <Link href="/" className="flex items-center gap-2" aria-label="NuThings Home">
-              <Image src="/logo.png" alt="NuThings" width={128} height={40} priority className="h-auto w-auto"/>
-              <span
-                className={`ml-3 whitespace-nowrap text-3xl md:text-5xl leading-none tracking-tight text-neutral-900 drop-shadow-sm ${pinyon.className}`}>
-                NuThings
-              </span>
+            <Link href="/" className="flex items-center gap-3" aria-label="NuThings Home">
+              <Image src="/logo.png" alt="NuThings" width={90} height={90} priority className="h-auto w-auto"/>
+              <div className="flex flex-col leading-none items-end">
+                <span
+                  className={`text-4xl md:text-6xl font-semibold tracking-tight text-neutral-900 drop-shadow-md ${pinyon.className}`}>
+                  NuThings
+                </span>
+                <span className={`text-lg md:text-3xl font-semibold text-[#d97706] text-right ${pinyon.className}`}>
+                  else matters...
+                </span>
+              </div>
             </Link>
 
             {/* Desktop nav */}
