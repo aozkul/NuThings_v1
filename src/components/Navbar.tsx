@@ -11,6 +11,8 @@ import {IconBadge} from "@/src/components/IconBadge";
 import LocaleSwitcher from "@/src/components/LocaleSwitcher";
 import {supabase} from "@/src/lib/supabaseClient";
 import type {Category} from "@/src/lib/types";
+import { Pinyon_Script } from "next/font/google";
+const pinyon = Pinyon_Script({ subsets: ["latin"], weight: "400" });
 
 type Cat = Pick<Category, "id" | "name" | "slug"> & { position?: number | null };
 
@@ -78,7 +80,7 @@ export default function Navbar() {
             <Link href="/" className="flex items-center gap-2" aria-label="NuThings Home">
               <Image src="/logo.png" alt="NuThings" width={128} height={40} priority className="h-auto w-auto"/>
               <span
-                className="ml-2 whitespace-nowrap text-base md:text-lg leading-none font-bold tracking-tight text-neutral-900">
+                className={`ml-3 whitespace-nowrap text-3xl md:text-5xl leading-none tracking-tight text-neutral-900 drop-shadow-sm ${pinyon.className}`}>
                 NuThings
               </span>
             </Link>
