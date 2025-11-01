@@ -102,7 +102,7 @@ export default function ParallaxSection({
                     <img
                         src={bgUrl}
                         alt=""
-                        className="w-full h-full object-cover"
+                        className="w-full h-full object-contain object-center"
                         loading="eager"
                     />
                 </div>
