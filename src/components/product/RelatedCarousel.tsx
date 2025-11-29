@@ -344,7 +344,7 @@ export default function RelatedCarousel({seedSlug, limit = 12}: Props) {
                                             src={p.image_url}
                                             alt={p.image_alt ?? p.name}
                                             fill
-                                            className="object-cover transition-transform duration-300 will-change-transform group-hover:scale-[1.03]"
+                                            className="object-contain bg-white transition-transform duration-300 will-change-transform group-hover:scale-[1.03]"
                                             sizes="(max-width: 768px) 60vw, (max-width: 1200px) 33vw, 25vw"
                                             priority={i < 3}
                                         />

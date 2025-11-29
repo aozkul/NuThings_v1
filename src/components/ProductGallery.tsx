@@ -151,7 +151,7 @@ export default function ProductGallery({
                 <img
                   src={img.image_url}
                   alt={img.alt || ""}
-                  className="h-16 w-20 md:h-20 md:w-24 object-cover"
+                  className="h-16 w-20 md:h-20 md:w-24 object-contain bg-white"
                   loading="lazy"
                   decoding="async"
           />
