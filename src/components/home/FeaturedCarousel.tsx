@@ -264,7 +264,7 @@ export default function FeaturedCarousel() {
                       fill
                       sizes="(max-width: 768px) 60vw, (max-width: 1200px) 33vw, 25vw"
                       priority={i < 3}
-                      className="object-cover"/>
+                      className="object-contain bg-white"/>
                   ) : (
                     <div className="h-full w-full grid place-items-center text-neutral-400">Görsel yok</div>
                   )}
