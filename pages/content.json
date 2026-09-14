@@ -1,0 +1,159 @@
+{
+  "name": "Nut Things",
+  "color": "#d9ba8c",
+  "secondary": "#c6d0af",
+  "icon": "app-icon.png",
+  "logo": true,
+  "copy": {
+    "tr": {
+      "tag": "ÜRÜNLERİN ARDINDAKİ DİJİTAL DENEYİM",
+      "title": "Ürünlere yer aç.\nHikâyeyi tamamla.",
+      "intro": "Nut Things; ürün kataloğu, içerik yönetimi ve e-ticaret akışlarını bir araya getiren bir web projesi. Burada projeyi ve yapısını keşfet.",
+      "features": [
+        [
+          "Kategoriden ürüne",
+          "Kategoriler, öne çıkan ürünler ve detay sayfalarıyla düzenli bir katalog."
+        ],
+        [
+          "Yönetimi bir araya getir",
+          "Ürün, stok, görsel ve site içeriği yönetimi için ortak bir alan."
+        ],
+        [
+          "Bütün deneyimi düşün",
+          "Çok dilli içerik, arama görünürlüğü ve alışveriş akışları için hazırlanmış yapı."
+        ]
+      ],
+      "offer": "Bu sayfa projenin tanıtımıdır. Sipariş veya ödeme almaz.",
+      "steps": [
+        "Projenin ana özelliklerini incele.",
+        "Kaynak deposundan kurulum ve geliştirme bilgilerine ulaş.",
+        "Proje hakkında soru sormak için iletişime geç."
+      ]
+    },
+    "en": {
+      "tag": "THE DIGITAL EXPERIENCE BEHIND THE PRODUCT",
+      "title": "Make room for products.\nComplete the story.",
+      "intro": "Nut Things is a web project bringing together a product catalogue, content management and commerce flows. Explore the project and its structure here.",
+      "features": [
+        [
+          "From category to product",
+          "An organized catalogue with categories, featured products and detail pages."
+        ],
+        [
+          "Bring management together",
+          "A shared area for products, stock, images and site content."
+        ],
+        [
+          "Consider the whole journey",
+          "A structure for multilingual content, search visibility and shopping flows."
+        ]
+      ],
+      "offer": "This is the project showcase. It does not accept orders or payments.",
+      "steps": [
+        "Explore the main project features.",
+        "Open the source repository for setup and development details.",
+        "Get in touch to discuss the project."
+      ]
+    },
+    "de": {
+      "tag": "DAS DIGITALE ERLEBNIS HINTER DEM PRODUKT",
+      "title": "Raum für Produkte.\nPlatz für ihre Geschichte.",
+      "intro": "Nut Things ist ein Webprojekt für Produktkataloge, Inhaltsverwaltung und Einkaufsabläufe. Hier erfährst du mehr über das Projekt und seinen Aufbau.",
+      "features": [
+        [
+          "Von der Kategorie zum Produkt",
+          "Ein geordneter Katalog mit Kategorien, ausgewählten Produkten und Detailseiten."
+        ],
+        [
+          "Verwaltung zusammenbringen",
+          "Ein gemeinsamer Bereich für Produkte, Bestand, Bilder und Website-Inhalte."
+        ],
+        [
+          "Den gesamten Weg betrachten",
+          "Eine Struktur für mehrsprachige Inhalte, Sichtbarkeit in Suchmaschinen und Einkaufsabläufe."
+        ]
+      ],
+      "offer": "Diese Seite stellt das Projekt vor. Sie nimmt keine Bestellungen oder Zahlungen entgegen.",
+      "steps": [
+        "Die wichtigsten Projektfunktionen kennenlernen.",
+        "Im Quellcode-Repository Einrichtung und Entwicklung nachlesen.",
+        "Bei Fragen zum Projekt Kontakt aufnehmen."
+      ]
+    }
+  },
+  "privacy": {
+    "en": [
+      [
+        "Scope of this page",
+        "This static project showcase has no account, checkout, analytics script or contact form. It does not connect to the project’s database, payment or email services."
+      ],
+      [
+        "Separate deployed applications",
+        "The source project contains integrations for database, authentication, email, payment and analytics. A separately deployed application must explain its own enabled services and data handling. This page is not a privacy promise for another deployment."
+      ]
+    ],
+    "tr": [
+      [
+        "Bu sayfanın kapsamı",
+        "Bu statik proje tanıtımında hesap, ödeme, analitik betiği veya iletişim formu yoktur. Projenin veritabanı, ödeme ve e-posta hizmetlerine bağlanmaz."
+      ],
+      [
+        "Ayrı yayımlanan uygulamalar",
+        "Kaynak proje veritabanı, kimlik doğrulama, e-posta, ödeme ve analitik entegrasyonları içerir. Ayrı bir yayındaki uygulama, etkin hizmetlerini ve veri işleme biçimini kendi politikasında açıklamalıdır. Bu sayfa başka bir yayın için gizlilik taahhüdü değildir."
+      ]
+    ],
+    "de": [
+      [
+        "Geltungsbereich dieser Seite",
+        "Diese statische Projektvorstellung enthält keine Konten, Zahlungen, Analyseskripte oder Kontaktformulare. Sie verbindet sich nicht mit Datenbank-, Zahlungs- oder E-Mail-Diensten des Projekts."
+      ],
+      [
+        "Andere veröffentlichte Anwendungen",
+        "Das Quellprojekt enthält Integrationen für Datenbank, Anmeldung, E-Mail, Zahlung und Analyse. Eine separat veröffentlichte Anwendung muss ihre aktiven Dienste und Datenverarbeitung in einer eigenen Erklärung beschreiben. Diese Seite ist keine Datenschutzzusage für andere Bereitstellungen."
+      ]
+    ]
+  },
+  "repo": "NuThings_v1",
+  "aliases": [
+    [
+      "index-en.html",
+      "en",
+      "home"
+    ],
+    [
+      "index-de.html",
+      "de",
+      "home"
+    ],
+    [
+      "support.html",
+      "tr",
+      "support"
+    ],
+    [
+      "privacy.html",
+      "tr",
+      "privacy"
+    ],
+    [
+      "support-en.html",
+      "en",
+      "support"
+    ],
+    [
+      "privacy-en.html",
+      "en",
+      "privacy"
+    ],
+    [
+      "support-de.html",
+      "de",
+      "support"
+    ],
+    [
+      "privacy-de.html",
+      "de",
+      "privacy"
+    ]
+  ]
+}
